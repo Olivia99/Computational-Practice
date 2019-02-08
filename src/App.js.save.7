@@ -1,0 +1,184 @@
+import React, { Component } from 'react';
+import './App.css';
+/*
+var listWisdoms = wisdoms.map((wisdom)=>
+<li>{wisdom}</li>);
+*/
+var wisdoms = [
+  "always wear underwear:)",
+  "floss her teeth every day.",
+  "has butterfiner..",
+  "is watching you now.",
+  "doesn't know how to spell.",
+  "doesn't like math.",
+  "sleep-in everymorning."
+]
+
+var names =[
+ "---Jieying Yang",
+"---Jieying Yang",
+"---Jieying Yang",
+"---Jieying Yang",
+"---Sharron Lam",
+"---Stephanie Lang",
+"---Natalia Chou"
+]
+
+var id= [
+"193758",
+"293648",
+"239574",
+"203975",
+"209384",
+"203756",
+"236565"
+]
+
+var min=20000;
+var max=80000;
+var id=0;
+var initial=0;
+class App extends Component {
+  constructor(props) {
+    super(props);
+    
+    var index = Math.floor(Math.random() * wisdoms.length);
+    var id=Math.floor(Math.random()*(max-min));
+    this.state = {
+      wisdom: wisdoms[index],
+      author: names[index],
+      Id: id[index],
+    // Id: id
+      value: 0
+ };
+
+    this.ListWisdoms =this.ListWisdoms.bind(this),
+    this.WisdomList = this.WisdomList.bind(this),
+    this.setRandomWisdom = this.setRandomWisdom.bind(this);
+    this.addWisdom = this.addWisdom.bind(this);
+ setInterval(this.setRandomWisdom,15000);
+  }
+  
+  setRandomWisdom() {
+   var index = Math.floor(Math.random()*wisdoms.length);
+var id=Math.floor(Math.random()*(max-min));
+var randomNum=Math.floor(Math.random()*wisdoms.length);
+ console.log("previous index num is: "+initial);
+
+  
+     console.log("current index num is: " +index);
+   if(initial !=index){
+
+       if(index>= wisdoms.length){
+           index =0; 
+	console.log("reset initial to 0");
+           this.setState({
+              wisdom: wisdoms[index],
+	      author: names[index],
+	     Id: id[randomNum]
+            //   Id: id
+           });  
+ console.log(" output wisdom index is "+index);
+         }else{
+		this.setState({
+		wisdom: wisdoms[index],
+		author: names[index],
+	       // Id :id 	
+	      Id: id[randomNum]
+		});
+ console.log(" output wisdom index is "+index);
+	}
+
+  initial=index;
+ 
+ }else{
+
+if(index<wisdoms.length-1){
+index++;
+}else{
+index=0;
+}
+console.log("previous=current num,  so new current index= "+index);
+this.setState({
+wisdom: wisdoms[index],
+author: names[index],
+Id: id[randomNum]
+//Id: id
+});
+
+ console.log(" output wisdom index is "+index);
+initial=index;
+}
+
+ }
+  
+  addWisdom() {
+var randomNum=Math.floor(Math.random()*wisdoms.length);
+
+    wisdoms.push(prompt("What new wisdom do you offer?"));
+    names.push(prompt("What is your name?"));
+//    id.push(randomNum);
+  }
+
+  
+  removeCurrentWisdom() {
+    var index = wisdoms.indexOf(this.state.wisdom);
+    wisdoms.splice(index, 1);
+  }
+
+
+ ListWisdoms(){
+  return <li>{this.value}</li>;
+}
+
+WisdomList(){
+  var wisdoms=this.wisdoms;
+  var listWisdoms =this.wisdoms.map((wisdoms)=>
+       <thiListWisdoms  value={wisdoms}/> );
+                                
+   return(
+                           
+     <ul> {this.listWisdoms}</ul>);
+  
+}
+
+
+  
+  render() {
+    return (
+      <div className="App">
+       <h2> Jieying Yang is a girl who</h2>
+       
+       {this.state.wisdom}
+        
+       <h4><i>{this.state.author}</i></h4>
+        <button className="more" onClick={this.setRandomWisdom}>Another</button>
+	<button className="new-wisdom" onClick={this.addWisdom}> Add your own </button>     
+<this.WisdomList wisdoms={wisdoms} />
+ 
+ </div>
+)
+
+}
+}
+/*
+function ListWisdoms(props){
+  return <li>{props.value}</li>;
+}
+
+function WisdomList(props){
+  var wisdoms= props.wisdoms;
+  var listWisdoms = wisdoms.map((wisdoms)=>
+       <ListWisdoms  value={wisdoms}/> );
+                                
+   return(
+                           
+     <ul> {listWisdoms}</ul>);
+  
+}
+ReactDOM.render(
+  <WisdomList wisdoms={wisdoms} />,
+  document.getElementById('root')
+);
+*/
+export default App;
