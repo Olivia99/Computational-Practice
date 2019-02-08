@@ -43,7 +43,7 @@ function WisdomList(props){
   var wisdoms= props.wisdoms;
   var listWisdoms = wisdoms.map((wisdoms)=>
        <ListWisdoms  value={wisdoms}/> );
- var index=Math.floor(Math.random()*wisdoms.length); 
+ var index=Math.floor(Math.random()*wisdoms.length-4); 
 var SliceWisdoms = listWisdoms.slice(index,index+3);                                
    return(
                           
